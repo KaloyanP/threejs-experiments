@@ -15,7 +15,7 @@
     "build": "webpack --mode production"
   },
   "dependencies": {
-    "cubic-spline": "^3.0.3",
+    "noisejs": "^2.1.0",
     "stats.js": "^0.17.0",
     "three": "^0.119.0",
     "three-obj-loader": "^1.1.3",

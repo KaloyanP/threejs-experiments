@@ -47,35 +47,17 @@ composer.addPass(new RenderPass(scene, camera));
 const bloomPass = new UnrealBloomPass(new Vector2( window.innerWidth, window.innerHeight ), 1.5, 0.4, 0.85 );
 bloomPass.enabled = true;
 bloomPass.threshold = 0;
-bloomPass.strength = 2;
+bloomPass.strength = 0.5;
 bloomPass.radius =  1;
 bloomPass.renderToScreen = true;
 composer.addPass(bloomPass);
 
-// render loop
-const onAnimationFrameHandler = (timeStamp) => {
-  stats.begin();
-  if (resizeRendererToDisplaySize(renderer)) {
-    const canvas = renderer.domElement;
-    camera.aspect = canvas.clientWidth / canvas.clientHeight;
-    camera.updateProjectionMatrix();
-    composer.setSize(canvas.width, canvas.height);
-  }
-
-  // renderer.render(scene, camera);
-  renderPoints(timeStamp);
-  renderer.clear();
-  composer.render(timeStamp);
-  window.requestAnimationFrame(onAnimationFrameHandler);
-  stats.end();
-}
-window.requestAnimationFrame(onAnimationFrameHandler);
-
 // resize
 const windowResizeHanlder = () => { 
   const { innerHeight, innerWidth } = window;
-  renderer.setSize(innerWidth, innerHeight);
   camera.aspect = innerWidth / innerHeight;
+  composer.setSize(innerWidth, innerHeight);
+  renderer.setSize(innerWidth, innerHeight);
   camera.updateProjectionMatrix();
 };
 
@@ -84,14 +66,8 @@ const resizeRendererToDisplaySize = (renderer)=> {
   const width = canvas.clientWidth;
   const height = canvas.clientHeight;
   const needResize = canvas.width !== width || canvas.height !== height;
-  if (needResize) {
-    renderer.setSize(width, height, false);
-  }
   return needResize;
 }
-
-windowResizeHanlder();
-window.addEventListener('resize', windowResizeHanlder);
 
 // dom
 document.body.style.margin = 0;
@@ -104,5 +80,23 @@ scene.add( particles );
 
 const renderPoints = (timeStamp) => {
   circle.updatePositions();
-  circle.material.color.setHSL( timeStamp * 0.00001, 0.5, 0.5 );
+  circle.material.color.setHSL( timeStamp * 0.0001, 0.5, 0.5 );
 }
+
+// render loop
+const onAnimationFrameHandler = (timeStamp) => {
+  stats.begin();
+  if (resizeRendererToDisplaySize(renderer)) {
+    windowResizeHanlder();
+  }
+  
+  renderPoints(timeStamp);
+  renderer.clear();
+  composer.render(timeStamp);
+  stats.end();
+  window.requestAnimationFrame(onAnimationFrameHandler);
+}
+window.requestAnimationFrame(onAnimationFrameHandler);
+
+windowResizeHanlder();
+window.addEventListener('resize', windowResizeHanlder);
