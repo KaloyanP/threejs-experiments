@@ -1,5 +1,9 @@
 # Procedural brilliant circle
 
+![A pink dotted waveform pattern forming a circular shape on a black background.](docs-images/image.png)
+
+See a live deployment [here](https://main--teal-naiad-78b83d.netlify.app/).
+
 ## Running the development server
 To see the changes you make to the starter project go to the project folder in terminal and type...
 
