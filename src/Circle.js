@@ -1,6 +1,7 @@
 import { BufferGeometry, Float32BufferAttribute, TextureLoader,PointsMaterial, NormalBlending} from 'three';
 
 import { Noise } from "noisejs";
+import circle from './circle.png';
 
 export class Circle {
     constructor(innerSize){
@@ -22,7 +23,7 @@ export class Circle {
         this.animationTick = 0;
         
         this.geometry = new BufferGeometry();
-        this.sprite = new TextureLoader().load( 'src/circle.png' );
+        this.sprite = new TextureLoader().load( circle );
         this.material = new PointsMaterial( {
             map: this.sprite,
             alphaMap: this.sprite,

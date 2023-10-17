@@ -17,10 +17,10 @@ module.exports = {
         test: /\.js$/,
         use: 'babel-loader',
         exclude: path.resolve(__dirname, './node_modules/')
-      },{
-        test: /\.(jpe?g|png|gif|svg|tga|gltf|babylon|mtl|pcb|pcd|prwm|obj|mat|mp3|ogg)$/i,
-        use: 'file-loader',
-        exclude: path.resolve(__dirname, './node_modules/')
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
       },{
         test: /\.(vert|frag|glsl|shader|txt)$/i,
         use: 'raw-loader',
@@ -36,6 +36,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new HtmlWebpackPlugin({'title': 'three-seed project'})
+    new HtmlWebpackPlugin({'title': 'Circle project'})
   ]
 }
